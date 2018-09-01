@@ -107,5 +107,22 @@ int main() {
     }
     printf("\n");
     
+    int *vector;
+    
+    vector = generateRandomVector(vectorLenght, vectorRange);
+    
+    printf("Vetor gerado: ");
+    for (int i=0; i < 50; i++) {
+        printf("%d ", vector[i]);
+    }
+    printf("\n");
+    
+    selectionSort(vector, 50);
+    
+    for (int i=0; i < 50; i++) {
+        printf("%d ", vector[i]);
+    }
+    printf("\n");
+    
     return 0;
 }
