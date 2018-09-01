@@ -54,7 +54,7 @@ void selectionSort(int vector[], int lenght) {
     clock_t end = clock();
     
     duration = end-start;
-    printf("Duracao selection sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+    printf("Selection sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
 }
 
 void insertionSort(int vector[], int lenght) {
@@ -75,7 +75,7 @@ void insertionSort(int vector[], int lenght) {
     clock_t end = clock();
     
     duration = end-start;
-    printf("Duracao insertion sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+    printf("Insertion sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
 }
 
 void bubbleSort(int vector[], int lenght) {
@@ -99,7 +99,19 @@ void bubbleSort(int vector[], int lenght) {
     clock_t end = clock();
 
     duration = end-start;
-    printf("Duracao bubble sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+    printf("Bubble sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+}
+
+void menu() {
+    int lenght;
+    int range;
+    
+    printf("Selecione o tamanho do vetor a ser gerado: ");
+    scanf("%d", &lenght);
+    
+    printf("Defina o valor máximo para os inteiros do vetor");
+    scanf("%d", &range);
+    
 }
 
 #define vectorLenght 500
@@ -107,26 +119,32 @@ void bubbleSort(int vector[], int lenght) {
 int main() {
     
     int *vector1, *vector2, *vector3;
+    int lenght;
+    int range;
     
-    vector1 = generateRandomVector(vectorLenght, vectorRange);
-    vector2 = copyVector(vector1, vectorLenght);
-    vector3 = copyVector(vector1, vectorLenght);
+    printf("Selecione o tamanho do vetor a ser gerado: ");
+    scanf("%d", &lenght);
+    
+    printf("Defina o valor máximo para os inteiros do vetor: ");
+    scanf("%d", &range);
+    
+    vector1 = generateRandomVector(lenght, range);
+    vector2 = copyVector(vector1, lenght);
+    vector3 = copyVector(vector1, lenght);
     
     printf("Vetor gerado: ");
-    for (int i=0; i < vectorLenght; i++) {
+    for (int i=0; i < lenght; i++) {
         printf("%d ", vector1[i]);
     }
-    printf("\n");
+    printf("\n\n - Tempo de execução de cada algorítmo -\n");
     
-    //SelectionSort
-    selectionSort(vector1, vectorLenght);
+    //Chamada dos algoritmos
+    selectionSort(vector1, lenght);
+    insertionSort(vector2, lenght);
+    bubbleSort(vector3, lenght);
     
-    //InsertionSort
-    insertionSort(vector2, vectorLenght);
-    
-    //BubbleSort
-    bubbleSort(vector3, vectorLenght);
-    for (int i=0; i < vectorLenght; i++) {
+    printf("\nVetor ordenado: ");
+    for (int i=0; i < lenght; i++) {
         printf("%d ", vector3[i]);
     }
     printf("\n");
