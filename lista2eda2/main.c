@@ -20,6 +20,18 @@ int* generateRandomVector(int lenght, int maxValue) {
     return vector;
 }
 
+int* copyVector(int *copiedVector, int lenght) {
+    int *finalVector;
+    
+    finalVector = malloc(lenght * sizeof(int));
+    
+    for (int i=0; i < lenght; i++) {
+        finalVector[i] = copiedVector[i];
+    }
+    
+    return finalVector;
+}
+
 void selectionSort(int vector[], int lenght) {
     int menorIndex;
     int aux;
@@ -42,29 +54,56 @@ void selectionSort(int vector[], int lenght) {
     clock_t end = clock();
     
     duration = end-start;
-    printf("Duracao bubble sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+    printf("Duracao selection sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+}
+
+void insertionSort(int vector[], int lenght) {
+    int aux;
+    int j;
+    double duration;
+    
+    clock_t start = clock();
+    for (int i = 0; i < lenght; i++) {
+        j = i;
+        while (j > 0 && (vector[j] < vector[j-1])) {
+            aux = vector[j];
+            vector[j] = vector[j-1];
+            vector[j-1] = aux;
+            j--;
+        }
+    }
+    clock_t end = clock();
+    
+    duration = end-start;
+    printf("Duracao insertion sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
 }
 
 #define vectorLenght 50
 #define vectorRange 100
 int main() {
     
+    int *vector1, *vector2;
     
-    
-    int *vector;
-    
-    vector = generateRandomVector(vectorLenght, vectorRange);
+    vector1 = generateRandomVector(vectorLenght, vectorRange);
+    vector2 = copyVector(vector1, vectorLenght);
     
     printf("Vetor gerado: ");
-    for (int i=0; i < 50; i++) {
-        printf("%d ", vector[i]);
+    for (int i=0; i < vectorLenght; i++) {
+        printf("%d ", vector1[i]);
     }
     printf("\n");
     
-    selectionSort(vector, 50);
+    //SelectionSort
+    selectionSort(vector1, vectorLenght);
+    for (int i=0; i < vectorLenght; i++) {
+        printf("%d ", vector1[i]);
+    }
+    printf("\n");
     
-    for (int i=0; i < 50; i++) {
-        printf("%d ", vector[i]);
+    //InsertionSort
+    insertionSort(vector2, vectorLenght);
+    for (int i=0; i < vectorLenght; i++) {
+        printf("%d ", vector2[i]);
     }
     printf("\n");
     
