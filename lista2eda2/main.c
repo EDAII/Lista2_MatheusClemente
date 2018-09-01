@@ -78,14 +78,39 @@ void insertionSort(int vector[], int lenght) {
     printf("Duracao insertion sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
 }
 
-#define vectorLenght 50
-#define vectorRange 100
+void bubbleSort(int vector[], int lenght) {
+    int aux;
+    int trocou;
+    double duration;
+    
+    clock_t start = clock();
+    do {
+        trocou = 0;
+        for (int i = 0; i < lenght-1; i++) {
+            if (vector[i]>vector[i+1]) {
+                trocou = 1;
+                aux = vector[i];
+                vector[i] = vector[i+1];
+                vector[i+1] = aux;
+            }
+        }
+        
+    } while (trocou);
+    clock_t end = clock();
+
+    duration = end-start;
+    printf("Duracao bubble sort: %lf segundos\n", duration/ CLOCKS_PER_SEC);
+}
+
+#define vectorLenght 500
+#define vectorRange 1000
 int main() {
     
-    int *vector1, *vector2;
+    int *vector1, *vector2, *vector3;
     
     vector1 = generateRandomVector(vectorLenght, vectorRange);
     vector2 = copyVector(vector1, vectorLenght);
+    vector3 = copyVector(vector1, vectorLenght);
     
     printf("Vetor gerado: ");
     for (int i=0; i < vectorLenght; i++) {
@@ -95,16 +120,16 @@ int main() {
     
     //SelectionSort
     selectionSort(vector1, vectorLenght);
-    for (int i=0; i < vectorLenght; i++) {
-        printf("%d ", vector1[i]);
-    }
-    printf("\n");
     
     //InsertionSort
     insertionSort(vector2, vectorLenght);
+    
+    //BubbleSort
+    bubbleSort(vector3, vectorLenght);
     for (int i=0; i < vectorLenght; i++) {
-        printf("%d ", vector2[i]);
+        printf("%d ", vector3[i]);
     }
     printf("\n");
     
+    return 0;
 }
